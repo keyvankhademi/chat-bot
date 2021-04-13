@@ -1,5 +1,6 @@
 from es import ElasticSearch
 from nlp.cleaner import Cleaner
+from wikipedia import Wikipedia
 
 DEFAULT = [
     "Sorry, I don't get what you're saying, can you try again?",
@@ -22,12 +23,18 @@ class Bot:
     def __init__(self):
         self.cleaner = Cleaner
         self.es = ElasticSearch
+        self.wikipedia = Wikipedia()
 
-    def ask(self, raw_input_string):
+    def ask(self, raw_input_string: str):
         """
         :param raw_input_string: Users question as raw string
         :return: Bots response as string
         """
+
+        if raw_input_string.startswith("Wikipedia:"):
+            text = raw_input_string.replace("Wikipedia:", "")
+            return self.wikipedia.search(text)
+
         query = self.cleaner.clean(raw_input_string)
         results = self.es.search(query)
 
