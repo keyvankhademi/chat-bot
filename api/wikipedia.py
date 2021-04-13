@@ -1,7 +1,9 @@
 import requests
 
+from api import API
 
-class Wikipedia:
+
+class Wikipedia(API):
     url = "https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch={}"
 
     def search(self, text):

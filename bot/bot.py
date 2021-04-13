@@ -1,6 +1,6 @@
 from es import ElasticSearch
 from nlp.cleaner import Cleaner
-from wikipedia import Wikipedia
+from api import Wikipedia
 
 DEFAULT = [
     "Sorry, I don't get what you're saying, can you try again?",
