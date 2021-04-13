@@ -2,6 +2,7 @@ from api.wolfram import Wolfram
 from es import ElasticSearch
 from nlp.cleaner import Cleaner
 from api import Wikipedia
+from googletrans import Translator
 
 DEFAULT = [
     "Sorry, I don't get what you're saying, can you try again?",
@@ -29,13 +30,9 @@ class Bot:
     def __init__(self):
         self.cleaner = Cleaner
         self.es = ElasticSearch
+        self.translator = Translator()
 
-    def ask(self, raw_input_string: str):
-        """
-        :param raw_input_string: Users question as raw string
-        :return: Bots response as string
-        """
-
+    def get_response(self, raw_input_string: str):
         for api_key, api in Bot.APIs.items():
             if raw_input_string.startswith(api_key):
                 text = raw_input_string.replace(api_key, "")
@@ -50,3 +47,15 @@ class Bot:
         from random import randint
 
         return DEFAULT[randint(0, len(DEFAULT) - 1)]
+
+    def ask(self, raw_input_string: str):
+        """
+        :param raw_input_string: Users question as raw string
+        :return: Bots response as string
+        """
+
+        lang = self.translator.detect(raw_input_string).lang
+        translated = self.translator.translate(raw_input_string, 'en', lang).text
+        english_response = self.get_response(translated)
+        return self.translator.translate(english_response, lang, 'en').text
+

@@ -58,3 +58,7 @@ with an answer.
     * Start the sentence with "Calculate" and the bot will
     use wolframalpha api to create an embedded image of the
     result in the chat.
+1. Google Translate
+    * You can chat with the bot in any language that you want.
+    It will respond in the same language.
+    Don't believe me? Give it a try :)
