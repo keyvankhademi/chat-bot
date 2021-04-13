@@ -24,7 +24,7 @@
 3. Set the host address and port at the top of `python sockets/main.py`.
 4. In a new terminal, run `python sockets/main.py` when the other bot is running as host.
 
-### Assignment 3 - Features
+### Features
 1. GUI:
     - We implemented a GUI to improve the overall experience for our users.
 2. POS Tagging:
@@ -40,10 +40,21 @@
 7. Extra Default Responses:
     - To keep conversation going, there are now more, and on topic, default responses. This keeps the conversation going even when the user is confusing the bot.
 
-### Features of OOMCK-Bot for an API
+### Features of caht bot for an API
 The following features of our bot could be put in an API for others to use.
 1. Easy connection with another bot through sockets.
 2. Tokenizing user input with NLTK.
 3. Processing and loading of data from a JSON file into an Elastic Search instance.
 4. Answer questions regarding the Fast and Furious franchise.
 5. The basic structure of our chat-bot allows it to be used with a variety of datasets according to a developer's specific needs.
+
+### API calls
+The following features of out bot uses APIs to come up
+with an answer.
+1. Wikipedia
+    * Start the sentence with "What is the definition of"
+    and the bot will try to find the definition from Wikipedia.
+1. Wolframalpha
+    * Start the sentence with "Calculate" and the bot will
+    use wolframalpha api to create an embedded image of the
+    result in the chat.
