@@ -1,3 +1,4 @@
+from api.wolfram import Wolfram
 from es import ElasticSearch
 from nlp.cleaner import Cleaner
 from api import Wikipedia
@@ -20,10 +21,14 @@ class Bot:
     The main bot class
     """
 
+    APIs = {
+        "What is the definition of": Wikipedia(),
+        "Calculate": Wolfram(),
+    }
+
     def __init__(self):
         self.cleaner = Cleaner
         self.es = ElasticSearch
-        self.wikipedia = Wikipedia()
 
     def ask(self, raw_input_string: str):
         """
@@ -31,9 +36,10 @@ class Bot:
         :return: Bots response as string
         """
 
-        if raw_input_string.startswith("Wikipedia:"):
-            text = raw_input_string.replace("Wikipedia:", "")
-            return self.wikipedia.search(text)
+        for api_key, api in Bot.APIs.items():
+            if raw_input_string.startswith(api_key):
+                text = raw_input_string.replace(api_key, "")
+                return api.search(text)
 
         query = self.cleaner.clean(raw_input_string)
         results = self.es.search(query)

@@ -41,8 +41,6 @@ body {
 .chat-container {
   width: 60vw;
   min-width: 500px;
-  display: flex;
-  flex-direction: column;
   flex-direction: column;
   justify-content: flex-end;
   height: 50vh;

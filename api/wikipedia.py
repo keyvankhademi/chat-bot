@@ -4,10 +4,15 @@ from api import API
 
 
 class Wikipedia(API):
-    url = "https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&srsearch={}"
+    url = "https://en.wikipedia.org/w/api.php"
 
     def search(self, text):
-        r = requests.get(Wikipedia.url.format(text))
+        r = requests.get(Wikipedia.url, {
+            "action": "query",
+            "list": "search",
+            "format": "json",
+            "srsearch": text,
+        })
         data = r.json()["query"]["search"]
 
         if len(data) == 0:
